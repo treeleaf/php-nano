@@ -1,3 +1,4 @@
+*~
 tests/*.exp
 tests/*.diff
 tests/*.out
