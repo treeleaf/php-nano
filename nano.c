@@ -55,11 +55,20 @@ void s_symbol_info_to_zval (zval *zv, struct nn_symbol_properties *buffer TSRMLS
      * remove by recoye
     object_init (zv);
     */
+#if PHP_VERSION_ID >= 80000
+    zend_object *zo = Z_OBJ(*zv);
+    zend_update_property_string (NULL, zo, "name", sizeof ("name") - 1, buffer->name TSRMLS_CC);
+    zend_update_property_long (NULL, zo, "value", sizeof ("value") - 1, (long) buffer->value TSRMLS_CC);
+    zend_update_property_long (NULL, zo, "ns", sizeof ("ns") - 1, (long) buffer->ns TSRMLS_CC);
+    zend_update_property_long (NULL, zo, "type", sizeof ("type") - 1, (long) buffer->type TSRMLS_CC);
+    zend_update_property_long (NULL, zo, "unit", sizeof ("unit") - 1, (long) buffer->unit TSRMLS_CC);
+#else
     zend_update_property_string (NULL, zv, "name", sizeof ("name") - 1, buffer->name TSRMLS_CC);
     zend_update_property_long (NULL, zv, "value", sizeof ("value") - 1, (long) buffer->value TSRMLS_CC);
     zend_update_property_long (NULL, zv, "ns", sizeof ("ns") - 1, (long) buffer->ns TSRMLS_CC);
     zend_update_property_long (NULL, zv, "type", sizeof ("type") - 1, (long) buffer->type TSRMLS_CC);
     zend_update_property_long (NULL, zv, "unit", sizeof ("unit") - 1, (long) buffer->unit TSRMLS_CC);
+#endif
 }
 
 /* {{{ proto void NanoMsg\Nano::symbolInfo([integer symbol])

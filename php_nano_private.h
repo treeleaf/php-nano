@@ -39,6 +39,17 @@
 #include "Zend/zend_exceptions.h"
 #include "ext/standard/info.h"
 
+#if PHP_VERSION_ID >= 80000
+#undef TSRMLS_D
+#define TSRMLS_D
+#undef TSRMLS_DC
+#define TSRMLS_DC
+#undef TSRMLS_C
+#define TSRMLS_C
+#undef TSRMLS_CC
+#define TSRMLS_CC
+#endif
+
 /*
   Definition for the main class (holds constants)
 */
