@@ -652,7 +652,7 @@ PHP_MINIT_FUNCTION(nano)
     nano_socket_object_handlers.offset = XtOffsetOf(php_nano_socket_object, zo);
     nano_socket_object_handlers.free_obj = (zend_object_free_obj_t) s_nano_socket_object_free_storage;
 
-    php_nano_exception_sc_entry = zend_register_internal_class_ex (&ce_exception, zend_exception_get_default (TSRMLS_C) TSRMLS_CC);
+    php_nano_exception_sc_entry = zend_register_internal_class_ex (&ce_exception, zend_ce_exception TSRMLS_CC);
     php_nano_exception_sc_entry->ce_flags &= ~ZEND_ACC_FINAL;
 #else
     php_nano_exception_sc_entry = zend_register_internal_class_ex (&ce_exception, zend_exception_get_default (TSRMLS_C), NULL TSRMLS_CC);
